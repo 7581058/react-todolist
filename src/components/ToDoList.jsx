@@ -1,6 +1,6 @@
-import React from 'react';
-import ToDoListItem from './ToDoListItem';
-import styled from 'styled-components';
+import React from 'react'
+import ToDoListItem from './ToDoListItem'
+import styled from 'styled-components'
 import { MdOutlineFilterTiltShift } from 'react-icons/md'
 
 function ToDoList({ todos, onRemove, onToggle, onChangeSelectedTodo, onInsertToggle }) {
@@ -25,10 +25,10 @@ function ToDoList({ todos, onRemove, onToggle, onChangeSelectedTodo, onInsertTog
         />
       ))}
     </ListContainer>
-  );
+  )
 }
 
-export default React.memo(ToDoList);
+export default React.memo(ToDoList)
 
 const ListContainer = styled.div`
   padding: 0;

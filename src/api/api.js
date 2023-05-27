@@ -19,7 +19,6 @@ export async function createTodos(todo, order) {
       }
     )
     const json = await res.json()
-    console.log("만들기",json)
     return json
   } catch (error) {
     console.error("error create todos:", error)
@@ -40,7 +39,6 @@ export async function getTodos() {
       }
     )
     const json = await res.json()
-    console.log("겟",json)
     return json
   } catch (error) {
     console.error("error get todos:", error)
@@ -48,7 +46,7 @@ export async function getTodos() {
   
 }
 
-export async function updateTodos(id, title, done) {
+export async function updateTodos(id, title, done, order) {
   try {
     const res = await fetch(
       `https://asia-northeast3-heropy-api.cloudfunctions.net/api/todos/${id}`,
@@ -62,11 +60,11 @@ export async function updateTodos(id, title, done) {
         body: JSON.stringify({
           title: title,
           done: done,
+          order: order
         }),
       }
     )
-    const json = await res.json();
-    //console.log("업데이트",json)
+    const json = await res.json()
     return json
   } catch (error) {
     console.error("error update todos:", error)
@@ -86,7 +84,6 @@ export async function deleteTodos(id) {
       }
     )
     const json = await res.json()
-    console.log("삭제",json)
     return json
   } catch (error) {
     console.error("error delete todos:", error)

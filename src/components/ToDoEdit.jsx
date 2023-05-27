@@ -1,39 +1,27 @@
-import { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import { useCallback, useEffect, useState } from 'react'
+import styled from 'styled-components'
 
 function ToDoEdit({ insertToggle, selectedTodo, onUpdate }) {
   const [value, setValue] = useState('')
 
   const onChange = useCallback((e) => {
-    setValue(e.target.value);
+    setValue(e.target.value)
   }, [])
 
-  // const onSubmit = useCallback(
-  //   (e) => {
-  //     onUpdate(selectedTodo.id, value);
-  //     setValue('');
-  //     e.preventDefault();
-  //   },
-  //   [onUpdate, value],
-  // );
-
   const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      const capturedValue = value; // 현재 값을 캡처
-  
-      // capturedValue를 사용하여 원하는 동작 수행
-      onUpdate(selectedTodo.id, capturedValue);
-      setValue('');
+    () => {
+      const capturedValue = value
+      onUpdate(selectedTodo.id, capturedValue, selectedTodo.done, selectedTodo.order)
+      setValue('')
     },
-    [onUpdate, selectedTodo.id, value]
-  );
+    [onUpdate, selectedTodo.id, selectedTodo.done, selectedTodo.order, value]
+  )
 
   useEffect(() => {
     if (selectedTodo) {
-      setValue(selectedTodo.text);
+      setValue(selectedTodo.text)
     }
-  }, [selectedTodo]);
+  }, [selectedTodo])
   return (
     <EditBackground className="background">
       <EditForm>
@@ -49,10 +37,10 @@ function ToDoEdit({ insertToggle, selectedTodo, onUpdate }) {
         </div>
       </EditForm>
     </EditBackground>
-  );
+  )
 }
 
-export default ToDoEdit;
+export default ToDoEdit
 
 const EditBackground = styled.div`
   position: fixed;
@@ -62,7 +50,6 @@ const EditBackground = styled.div`
   left: 0;
   z-index: 5;
   background-color: rgba(0, 0, 0, .3);
-  
 `
 
 const EditForm = styled.form`
@@ -109,11 +96,9 @@ const EditForm = styled.form`
     cursor: pointer;
     background-color: #dedede;
     border: none;
-    
     width: 100px;
     height: 40px;
     border-radius: 8px;
-    // padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     &[type='submit'] {
       background-color: #37352f;

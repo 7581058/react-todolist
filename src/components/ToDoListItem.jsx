@@ -1,7 +1,7 @@
-import React from 'react';
-import { MdClear } from 'react-icons/md';
+import React from 'react'
+import { MdClear } from 'react-icons/md'
 import { FiEdit } from 'react-icons/fi'
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 
 function ToDoListItem({
   todo,
@@ -10,15 +10,15 @@ function ToDoListItem({
   onChangeSelectedTodo,
   onInsertToggle,
 }) {
-  const { id, text, done } = todo;
+  const { id, text, done } = todo
   return (
     <TodoListItem className="TodoListItem" onClick={() => onToggle(id)} done={done}>
       <div className="text">{text}</div>
       <EditButton
         className="edit"
         onClick={() => {
-          onChangeSelectedTodo(todo);
-          onInsertToggle();
+          onChangeSelectedTodo(todo)
+          onInsertToggle()
         }}
       >
         <FiEdit />
@@ -27,10 +27,10 @@ function ToDoListItem({
         <MdClear />
       </RemoveButton>
     </TodoListItem>
-  );
+  )
 }
 
-export default React.memo(ToDoListItem);
+export default React.memo(ToDoListItem)
 
 const EditButton = styled.div`
   display: flex;
@@ -66,6 +66,9 @@ const TodoListItem = styled.li`
   border-radius: 8px;
   box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.1); 
   margin-bottom: 5px;
+  .text {
+    width: 100%;
+  }
   &:hover {
     ${RemoveButton} {
       display: initial;
@@ -79,26 +82,5 @@ const TodoListItem = styled.li`
       color: #dedede;
       text-decoration: line-through;
     `}
-`
-const TodoCheckbox = styled.div`
-  cursor: pointer;
-  flex: 1;
-  display: flex;
-  align-items: center;
-  svg {
-    font-size: 1.5rem;
-  }
-  .text {
-    margin-left: 0.5rem;
-  }
-  &.checked {
-    svg {
-      color: rgb(25,119,252);
-    }
-    .text {
-      color: #adb5bd;
-      text-decoration: line-through;
-    }
-  }
 `
 

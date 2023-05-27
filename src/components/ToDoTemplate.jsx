@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 import { CgBoard } from 'react-icons/cg'
 
 function TodoTemplate({children}) {
@@ -11,30 +11,29 @@ function TodoTemplate({children}) {
   const dayName = today.toLocaleDateString('ko-KR', {
     weekday: 'long'
   })
-
-    return (
-        <Template className="TodoTemplate">
-          <div className="head-top">
-            <div className="btn-board">
-            <div className="board-icon">
-              <CgBoard />
-            </div>
-            보드 보기
-            </div>
-            <div className="date">
-              <p className="today">{dateString}</p>
-              <p className="day">{dayName}</p>
-            </div>
+  return (
+      <Template className="TodoTemplate">
+        <div className="head-top">
+          <div className="btn-board">
+          <div className="board-icon">
+            <CgBoard />
           </div>
-            <TodoTitle className="head-title">
-              ToDoList 
-            </TodoTitle>
-            <TodoContent className="content">{children}</TodoContent>
-        </Template>
-    )
+          보드 보기
+          </div>
+          <div className="date">
+            <p className="today">{dateString}</p>
+            <p className="day">{dayName}</p>
+          </div>
+        </div>
+          <TodoTitle className="head-title">
+            ToDoList 
+          </TodoTitle>
+          <TodoContent className="content">{children}</TodoContent>
+      </Template>
+  )
 }
 
-export default TodoTemplate;
+export default TodoTemplate
 
 const Template = styled.div`
   margin: 0 auto;
@@ -69,6 +68,9 @@ const Template = styled.div`
       right: 10px;
       display: flex;
       font-size: 16px;
+      .day {
+        margin-left: 5px;
+      }
     }
   }
 `
