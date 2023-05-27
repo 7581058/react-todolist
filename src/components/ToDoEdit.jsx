@@ -2,18 +2,33 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function ToDoEdit({ insertToggle, selectedTodo, onUpdate }) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState('')
+
   const onChange = useCallback((e) => {
     setValue(e.target.value);
-  }, []);
+  }, [])
+
+  // const onSubmit = useCallback(
+  //   (e) => {
+  //     onUpdate(selectedTodo.id, value);
+  //     setValue('');
+  //     e.preventDefault();
+  //   },
+  //   [onUpdate, value],
+  // );
+
   const onSubmit = useCallback(
     (e) => {
-      onUpdate(selectedTodo.id, value);
-      setValue('');
       e.preventDefault();
+      const capturedValue = value; // 현재 값을 캡처
+  
+      // capturedValue를 사용하여 원하는 동작 수행
+      onUpdate(selectedTodo.id, capturedValue);
+      setValue('');
     },
-    [onUpdate, value],
+    [onUpdate, selectedTodo.id, value]
   );
+
   useEffect(() => {
     if (selectedTodo) {
       setValue(selectedTodo.text);
@@ -21,14 +36,17 @@ function ToDoEdit({ insertToggle, selectedTodo, onUpdate }) {
   }, [selectedTodo]);
   return (
     <EditBackground className="background">
-      <EditForm onSubmit={onSubmit} className="todoedit__insert">
+      <EditForm>
         <h2>수정하기</h2>
         <input
           onChange={onChange}
           value={value}
           placeholder="할 일을 입력하세요"
         />
-        <button type="submit">수정하기</button>
+        <div className='btn-wrap'>
+          <button>취소</button>
+          <button type="submit" onClick={onSubmit}>수정</button>
+        </div>
       </EditForm>
     </EditBackground>
   );
@@ -38,12 +56,13 @@ export default ToDoEdit;
 
 const EditBackground = styled.div`
   position: fixed;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
-  bottom: 0;
-  right: 0;
   z-index: 5;
-  background-color: rgba(0, 0, 0, 0.548);
+  background-color: rgba(0, 0, 0, .3);
+  
 `
 
 const EditForm = styled.form`
@@ -51,34 +70,54 @@ const EditForm = styled.form`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 300px;
-  background-color: white;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.1); 
+  padding: 20px;
+  box-sizing: border-box;
+  .btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+    gap: 40px;
+  }
   h2 {
     box-sizing: border-box;
     width: 100%;
     margin: 0;
     text-align: center;
     padding: 0.5rem;
-    background-color: rgb(25,119,252);
     color: white;
   }
   input {
-    margin: 2rem 0;
-    padding: 0.3rem;
-    border: none;
+    width: 100%;
+    font-size: 1rem;
+    color: #37352f;
+    height: 30px;
+    padding: 0.5rem;
     outline: none;
-    border-bottom: 1px solid rgb(25,119,252);
+    border: 2px solid #dedede;
+    border-radius: 8px;
   }
   button {
     cursor: pointer;
-    background-color: rgb(25,119,252);
+    background-color: #dedede;
     border: none;
-    color: white;
-    padding: 0.5rem 1rem;
+    
+    width: 100px;
+    height: 40px;
+    border-radius: 8px;
+    // padding: 0.5rem 1rem;
     margin-bottom: 1rem;
+    &[type='submit'] {
+      background-color: #37352f;
+      color: #fff;
+    }
   }
 `

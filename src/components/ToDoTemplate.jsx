@@ -1,9 +1,34 @@
 import styled from "styled-components";
+import { CgBoard } from 'react-icons/cg'
 
 function TodoTemplate({children}) {
+  const today = new Date()
+  const dateString = today.toLocaleDateString('ko-KR', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+  const dayName = today.toLocaleDateString('ko-KR', {
+    weekday: 'long'
+  })
+
     return (
         <Template className="TodoTemplate">
-            <TodoTitle className="app-title">Todo List</TodoTitle>
+          <div className="head-top">
+            <div className="btn-board">
+            <div className="board-icon">
+              <CgBoard />
+            </div>
+            보드 보기
+            </div>
+            <div className="date">
+              <p className="today">{dateString}</p>
+              <p className="day">{dayName}</p>
+            </div>
+          </div>
+            <TodoTitle className="head-title">
+              ToDoList 
+            </TodoTitle>
             <TodoContent className="content">{children}</TodoContent>
         </Template>
     )
@@ -12,21 +37,48 @@ function TodoTemplate({children}) {
 export default TodoTemplate;
 
 const Template = styled.div`
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
   width: 512px;
-  margin: 6rem auto 0 auto;
-  border-radius: 4px;
-  overflow: hidden;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  box-sizing: border-box;
+  .head-top {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 2px solid #dedede;
+    .btn-board {
+      font-size: 20px;
+      display: flex;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #37352f;
+      .board-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 24px;
+      }
+    }
+    .date {
+      position: absolute;
+      right: 10px;
+      display: flex;
+      font-size: 16px;
+    }
+  }
 `
 
 const TodoTitle = styled.div`
-  background:rgb(25,119,252);
-  color: white;
-  font-weight: bold;
-  height: 4rem;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: 600;
+  font-size: 32px;
+  color: #37352f;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `
 
 const TodoContent = styled.div`

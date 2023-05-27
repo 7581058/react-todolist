@@ -1,40 +1,29 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import ToDoListItem from './ToDoListItem';
-import {List} from 'react-virtualized'
 import styled from 'styled-components';
+import { MdOutlineFilterTiltShift } from 'react-icons/md'
 
 function ToDoList({ todos, onRemove, onToggle, onChangeSelectedTodo, onInsertToggle }) {
-  const rowRender = useCallback(
-    ({index,key,style}) => {
-      const todo = todos[index];
-      return(
-
-        <ToDoListItem
-        todo={todo}
-        key={key}
-        onToggle={onToggle}
-        onRemove={onRemove}
-        onInsertToggle={onInsertToggle}
-        onChangeSelectedTodo={onChangeSelectedTodo}
-        style={style}
-      />
-      )
-    },
-    [ todos, onRemove, onToggle, onChangeSelectedTodo, onInsertToggle ]
-  )
-  
+  const undoneTodos = todos.filter(todo => !todo.done)
   return (
     <ListContainer>
-      <List 
-        className='TodoList'
-        width={512} // 전체너비
-        height={513}// 전체 높이
-        rowCount={todos.length}//항목갯수
-        rowHeight={57} // 항목 높이
-        rowRenderer={rowRender} //항목을 렌더링할 때 쓰는 함수
-        list={todos}//배열
-        style={{outline:'none'}} //List에 기본 적용되는 outline 스타일 제거
-      />
+      <ListTitle>
+        <div className="title-icon">
+          <MdOutlineFilterTiltShift/>
+        </div>
+        할 일 
+        <div className='todo-left'>{undoneTodos.length}</div>
+      </ListTitle>
+      {todos.map((todo) => (
+        <ToDoListItem
+          key={todo.id}
+          todo={todo}
+          onToggle={onToggle}
+          onRemove={onRemove}
+          onInsertToggle={onInsertToggle}
+          onChangeSelectedTodo={onChangeSelectedTodo}
+        />
+      ))}
     </ListContainer>
   );
 }
@@ -44,7 +33,30 @@ export default React.memo(ToDoList);
 const ListContainer = styled.div`
   padding: 0;
   list-style: none;
-  min-height: 320px;
-  max-height: 513px;
-  overflow-y: auto;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  margin-top: 30px;
 `
+
+const ListTitle = styled.div`
+  color: #787774;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+  .title-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .todo-left {
+    margin-left: 10px;
+  }
+`
+

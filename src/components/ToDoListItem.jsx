@@ -1,12 +1,7 @@
 import React from 'react';
-import {
-  MdCheckBoxOutlineBlank,
-  MdRemoveCircleOutline,
-  MdCheckBox,
-  MdModeEditOutline,
-} from 'react-icons/md';
-// import cn from 'classnames';
-import styled from 'styled-components';
+import { MdClear } from 'react-icons/md';
+import { FiEdit } from 'react-icons/fi'
+import styled, { css } from 'styled-components';
 
 function ToDoListItem({
   todo,
@@ -14,50 +9,76 @@ function ToDoListItem({
   onToggle,
   onChangeSelectedTodo,
   onInsertToggle,
-  style
 }) {
-  const { id, text, checked } = todo;
+  const { id, text, done } = todo;
   return (
-    <ListContainer className="TodoListItem-virtualized" style={style}>
-      <TodoListItem className="TodoListItem">
-        <TodoCheckbox
-          //className={cn('checkbox', { checked: checked })}
-          onClick={() => onToggle(id)}
-        >
-          {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
-          <div className="text">{text}</div>
-        </TodoCheckbox>
-        <EditButton
-          className="edit"
-          onClick={() => {
-            onChangeSelectedTodo(todo);
-            onInsertToggle();
-          }}
-        >
-          <MdModeEditOutline />
-        </EditButton>
-        <RemoveButton className="remove" onClick={() => onRemove(id)}>
-          <MdRemoveCircleOutline />
-        </RemoveButton>
-      </TodoListItem>
-    </ListContainer>
+    <TodoListItem className="TodoListItem" onClick={() => onToggle(id)} done={done}>
+      <div className="text">{text}</div>
+      <EditButton
+        className="edit"
+        onClick={() => {
+          onChangeSelectedTodo(todo);
+          onInsertToggle();
+        }}
+      >
+        <FiEdit />
+      </EditButton>
+      <RemoveButton className="remove" onClick={() => onRemove(id)}>
+        <MdClear />
+      </RemoveButton>
+    </TodoListItem>
   );
 }
 
 export default React.memo(ToDoListItem);
 
-const ListContainer = styled.div`
-  & + & {
-    border-top: 1px solid #dee2e6;
-  }
-  &:nth-child(even) {
-    background-color: #f8f9fa;
+const EditButton = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
+  color: #dedede;
+  display: none;
+  &:hover {
+    color: #37352f;
   }
 `
+
+const RemoveButton = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #dedede;
+  cursor: pointer;
+  display: none;
+  &:hover {
+    color: #37352f;
+  }
+`
+
 const TodoListItem = styled.li`
   padding: 1rem;
   display: flex;
   align-items: center;
+  border: 1px solid #dedede;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1), 0 2px 2px rgba(0,0,0,0.1); 
+  margin-bottom: 5px;
+  &:hover {
+    ${RemoveButton} {
+      display: initial;
+    }
+    ${EditButton} {
+      display: initial;
+    }
+  }
+  ${props => props.done &&
+    css`
+      color: #dedede;
+      text-decoration: line-through;
+    `}
 `
 const TodoCheckbox = styled.div`
   cursor: pointer;
@@ -81,21 +102,3 @@ const TodoCheckbox = styled.div`
   }
 `
 
-const EditButton = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-right: 1rem;
-`
-
-const RemoveButton = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  color: #e84118;
-  cursor: pointer;
-  &:hover {
-    color: #ff7f5f;
-  }
-`
