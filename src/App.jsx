@@ -10,7 +10,7 @@ function App() {
   const [todos, setTodos] = useState([])
   const [selectedTodo, setSelectedTodo] = useState(null)
   const [insertToggle, setInsertToggle] = useState(false)
-  const [todoLoading, setTodoLoading] = useState(true)
+  const [todoLoading, setTodoLoading] = useState(false)
   const nextId = useRef(4)
 
   useEffect(() => {
