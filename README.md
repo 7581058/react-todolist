@@ -24,7 +24,7 @@
 
 ## 화면 & 구현 
 
-|:할 일 추가:|
+|할 일 추가|
 |---|
 | ![image](https://github.com/7581058/react-todolist/blob/main/screenshots/spinner.png?raw=true) |
 | ![image](https://github.com/7581058/react-todolist/blob/main/screenshots/add.png?raw=true) |
@@ -32,7 +32,7 @@
 할 일 목록이 출력되기 전에 로딩 애니메이션을 보여줍니다.   
 입력창을 통해 할 일을 입력해 추가할 수 있습니다. 
 
-|:할 일 수정:|
+|할 일 수정|
 |---|
 | ![image](https://github.com/7581058/react-todolist/blob/main/screenshots/done.png?raw=true) |
 | ![image](https://github.com/7581058/react-todolist/blob/main/screenshots/edit.png?raw=true) |
@@ -42,14 +42,14 @@
 할 일 위에 마우스를 올리면 할 일을 수정할 수 있는 버튼과 삭제할 수 있는 버튼이 나타납니다.   
 수정 버튼을 클릭하면 모달 창이 나타나 선택한 할 일을 수정 할 수 있습니다.   
 
-|:할 일 삭제:|
+|할 일 삭제|
 |---|
 | ![image](https://github.com/7581058/react-todolist/blob/main/screenshots/delete.png?raw=true) |
 
 할 일 위에 마우스를 올리면 할 일을 수정할 수 있는 버튼과 삭제할 수 있는 버튼이 나타납니다.   
 삭제 버튼을 클릭하면 선택한 할 일이 삭제됩니다.  
 
-|:그 외:|
+|그 외|
 |---|
 | ![image](https://github.com/7581058/react-todolist/blob/main/screenshots/add.png?raw=true) | 
 
